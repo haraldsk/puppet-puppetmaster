@@ -72,6 +72,8 @@ class puppetmaster (
   $puppetmaster_reporturl            = '',
   $puppetmaster_facts_terminus       = '',
   $puppetmaster_modulepath           = ''
+  $puppetmaster_pluginsync           = 'true',
+  $puppetmaster_storeconfigs         = 'true',
 ) {
 
   include puppetmaster::params
@@ -165,4 +167,27 @@ class puppetmaster (
     }
   }
 
+  if ($puppetmaster_pluginsync) {
+    ini_setting { 'puppetmaster_pluginsync':
+      section => 'master',
+      setting => 'pluginsync',
+      value   => $puppetmaster_pluginsync,
+    }
+  }
+  if ($puppetmaster_storeconfigs) {
+    ini_setting {
+    'puppetmaster_storeconfigs':
+      section => 'master',
+      setting => 'storeconfigs',
+      value   => $puppetmaster_storeconfigs;
+    'puppetmaster_thin_storeconfig':
+      section => 'master',
+      setting => 'thin_storeconfigs',
+      value   => 'true';
+    'puppetmaster_dbadapter':
+      section => 'main',
+      setting => 'dbadapter',
+      value   => 'sqlite3';
+    }
+  }
 }
