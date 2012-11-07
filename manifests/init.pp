@@ -74,6 +74,7 @@ class puppetmaster (
   $puppetmaster_modulepath           = '',
   $puppetmaster_pluginsync           = 'true',
   $puppetmaster_storeconfigs         = 'true',
+  $puppetmaster_use_vardir           = 'true',
 ) {
 
   include puppetmaster::params
@@ -188,6 +189,34 @@ class puppetmaster (
       section => 'main',
       setting => 'dbadapter',
       value   => 'sqlite3';
+    }
+  }
+  if ($puppetmaster_use_vardir) {
+    ini_setting {
+    'puppetmaster_logdir':
+      section => 'main',
+      setting => 'logdir',
+      value   => '/var/log/puppet';
+    'puppetmaster_vardir':
+      section => 'main',
+      setting => 'vardir',
+      value   => '/var/lib/puppet';
+    'puppetmaster_ssldir':
+      section => 'main',
+      setting => 'ssldir',
+      value   => '/var/lib/puppet/ssl';
+    'puppetmaster_rundir':
+      section => 'main',
+      setting => 'rundir',
+      value   => '/var/run/puppet';
+    'puppetmaster_factpath':
+      section => 'main',
+      setting => 'factpath',
+      value   => '$vardir/lib/facter';
+    'puppetmaster_templatedir':
+      section => 'main',
+      setting => 'templatedir',
+      value   => '$confdir/templates';
     }
   }
 }
