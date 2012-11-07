@@ -71,7 +71,7 @@ class puppetmaster (
   $puppetmaster_reports              = '',
   $puppetmaster_reporturl            = '',
   $puppetmaster_facts_terminus       = '',
-  $puppetmaster_modulepath           = ''
+  $puppetmaster_modulepath           = '',
   $puppetmaster_pluginsync           = 'true',
   $puppetmaster_storeconfigs         = 'true',
 ) {
